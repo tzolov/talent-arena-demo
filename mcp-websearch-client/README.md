@@ -1,4 +1,6 @@
-# Spring AI - Model Context Protocol (MCP) Brave Search Chatbot
+# Spring AI - Model Context Protocol (MCP) Brave Search
+
+MCP Client Boot Starter Reference documentation: https://docs.spring.io/spring-ai/reference/api/mcp/mcp-client-boot-starter-docs.html
 
 This example demonstrates how to build an interactive chatbot that combines Spring AI's Model Context Protocol (MCP) with the [Brave Search MCP Server](https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search). The application creates a persistent chatbot that maintains conversation history using Spring AI's Memory Advisor, allowing for contextual interactions across multiple exchanges. Users can engage in an ongoing conversation with the bot, which can perform internet searches through Brave Search to provide up-to-date information. The chatbot runs continuously until terminated with Ctrl-C, maintaining conversational state throughout the session.
 

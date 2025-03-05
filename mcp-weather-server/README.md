@@ -2,6 +2,8 @@
 
 This project demonstrates how to create a Spring AI Model Context Protocol (MCP) server that provides weather data using Spring WebFlux. It showcases how to implement MCP tools with Spring Boot's auto-configuration capabilities.
 
+Reference documentation: https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-starter-docs.html
+
 ## Overview
 
 The project provides:

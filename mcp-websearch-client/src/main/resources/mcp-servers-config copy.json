@@ -8,6 +8,14 @@
       ],
       "env": {
       }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/christiantzolov/Desktop/tmp"
+      ]
     }
   }
 }

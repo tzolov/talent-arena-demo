@@ -1,11 +1,8 @@
 package org.springframework.ai.mcp.samples.brave;
 
-import java.util.Scanner;
 import java.util.stream.Stream;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,17 +21,20 @@ public class Application {
 
 		return args -> {
 			
-			System.out.println("Tools: " +  Stream.of(tools.getToolCallbacks()).map(tc -> tc.getName()).toList());
+			System.out.println("Provided Tools: " +  Stream.of(tools.getToolCallbacks()).map(tc -> tc.getName()).toList());
+
+			String userQuestion = "Create a summary about the Talent Arena conference";
+
+			System.out.println("User Question: " + userQuestion);
 			
-			var output = chatClientBuilder.build().prompt()
+			var response = chatClientBuilder.build().prompt()
 					.system("You are useful assistant and can perform web searches Brave's search API to reply to your questions.")
-					.user("Create a summary about the Talent Arena conference and save it as markdown talent-arena.md file.")
+					.user(userQuestion)
 					.tools(tools)
 					.call()
 					.content();
 
-			System.out.println(output);
-
+			System.out.println("Response: " + response);
 		};
 	}
 }
