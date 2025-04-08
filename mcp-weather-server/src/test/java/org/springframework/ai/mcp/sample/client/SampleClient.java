@@ -18,13 +18,10 @@ package org.springframework.ai.mcp.sample.client;
 import java.util.Map;
 
 import io.modelcontextprotocol.client.McpClient;
-import io.modelcontextprotocol.spec.ClientMcpTransport;
+import io.modelcontextprotocol.spec.McpClientTransport;
 import io.modelcontextprotocol.spec.McpSchema.CallToolRequest;
 import io.modelcontextprotocol.spec.McpSchema.CallToolResult;
-import io.modelcontextprotocol.spec.McpSchema.GetPromptRequest;
-import io.modelcontextprotocol.spec.McpSchema.ListPromptsResult;
 import io.modelcontextprotocol.spec.McpSchema.ListToolsResult;
-import io.modelcontextprotocol.spec.McpSchema.ReadResourceRequest;
 
 /**
  * @author Christian Tzolov
@@ -32,9 +29,9 @@ import io.modelcontextprotocol.spec.McpSchema.ReadResourceRequest;
 
 public class SampleClient {
 
-	private final ClientMcpTransport transport;
+	private final McpClientTransport transport;
 
-	public SampleClient(ClientMcpTransport transport) {
+	public SampleClient(McpClientTransport transport) {
 		this.transport = transport;
 	}
 

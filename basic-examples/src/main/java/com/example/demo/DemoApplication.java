@@ -23,7 +23,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Value("classpath:conference-agenda.md")
+	@Value("classpath:devoxx-amsterdam-2025-schedule.md")
 	Resource conferanceAgenda;
 
 	@Bean
@@ -36,18 +36,15 @@ public class DemoApplication {
 			System.out.println(chatClient.prompt("Tell me a joke?").call().content());
 
 			// SYSTEM INSTRUCTIONS & PROMPT STUFFING & STRUCTURED OUTPUT		
-			record Stage(String name, List<Talk> talks) {
-				record Talk(String title, String time, List<Speaker> speakers, String tags, String stage) {
-					record Speaker(String name, String role) {}
-				}		
-			}
-	
-			var talks = chatClient.prompt()
+			record Track(String name, List<Talk> talks) {
+				record Talk(String time, String session, String location, String track) {};
+			}	
+			List<Track> talks = chatClient.prompt()
 				.system("You are a useful assistant. Be polite, and always finish the sentence with 'May the Force be with you.'")
-				.user(u -> u.text("Get the list of talks grouped by stage. Return only talks with two or more speakers :\n {topic}")
-						.param("topic", asText(conferanceAgenda)))
+				.user(u -> u.text("Get the list of talks grouped by tracks :\n {additionalContext}")
+						.param("additionalContext", asText(conferanceAgenda)))
 				.call()
-			 	.entity(new ParameterizedTypeReference<List<Stage>>() {});				
+			 	.entity(new ParameterizedTypeReference<List<Track>>() {});				
 			System.out.println(talks);
 			System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(talks));
 			
