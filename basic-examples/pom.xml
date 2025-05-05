@@ -12,7 +12,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>talent-arena-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ing-demo</name>
+	<name>taland-demo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -26,15 +26,15 @@
 			<artifactId>spring-ai-starter-model-olama</artifactId>
 		</dependency> -->
 		
-		<dependency>
-			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-starter-model-anthropic</artifactId>
-		</dependency>
-
 		<!-- <dependency>
 			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-starter-model-openai</artifactId>
+			<artifactId>spring-ai-starter-model-anthropic</artifactId>
 		</dependency> -->
+
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-starter-model-openai</artifactId>
+		</dependency>
 
 	</dependencies>
 	<dependencyManagement>

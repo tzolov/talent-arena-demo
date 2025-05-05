@@ -33,35 +33,35 @@ public class DemoApplication {
 
 			ChatClient chatClient = chatClientBuilder.build();
 
-			System.out.println(chatClient.prompt("Tell me a joke?").call().content());
+			// System.out.println(chatClient.prompt("Tell me a joke?").call().content());
 
 			// SYSTEM INSTRUCTIONS & PROMPT STUFFING & STRUCTURED OUTPUT		
-			record Track(String name, List<Talk> talks) {
-				record Talk(String time, String session, String location, String track) {};
-			}	
-			List<Track> talks = chatClient.prompt()
-				.system("You are a useful assistant. Be polite, and always finish the sentence with 'May the Force be with you.'")
-				.user(u -> u.text("Get the list of talks grouped by tracks :\n {additionalContext}")
-						.param("additionalContext", asText(conferanceAgenda)))
-				.call()
-			 	.entity(new ParameterizedTypeReference<List<Track>>() {});				
-			System.out.println(talks);
-			System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(talks));
+			// record Track(String name, List<Talk> talks) {
+			// 	record Talk(String time, String session, String location, String track) {};
+			// }	
+			// List<Track> talks = chatClient.prompt()
+			// 	.system("You are a useful assistant. Be polite, and always finish the sentence with 'May the Force be with you.'")
+			// 	.user(u -> u.text("Get the list of talks grouped by tracks :\n {additionalContext}")
+			// 			.param("additionalContext", asText(conferanceAgenda)))
+			// 	.call()
+			//  	.entity(new ParameterizedTypeReference<List<Track>>() {});				
+			// System.out.println(talks);
+			// System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(talks));
 			
 			// CHAT MEMORY
-			var chatClient2 = chatClientBuilder
-				.defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory())) // Enable chat memory
-				.build();			
-			System.out.println("Introducing the name: " + chatClient2.prompt("My name is Christian Tzolov").call().content());
-			System.out.println("Asking for the name: " + chatClient2.prompt("What is my name?").call().content());
+			// var chatClient2 = chatClientBuilder
+			// 	.defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory())) // Enable chat memory
+			// 	.build();			
+			// System.out.println("Introducing the name: " + chatClient2.prompt("My name is Christian Tzolov").call().content());
+			// System.out.println("Asking for the name: " + chatClient2.prompt("What is my name?").call().content());
 			
 			// TOOLs
-			var output = chatClient.prompt()
-				.tools(myTools)
-				.user("What to wear today in Amsterdam and in Barcelona?")
-				.call()
-				.content();				
-			System.out.println("\n" + output);
+			// var output = chatClient.prompt()
+			// 	.tools(myTools)
+			// 	.user("What to wear today in Amsterdam and in Barcelona?")
+			// 	.call()
+			// 	.content();				
+			// System.out.println("\n" + output);
 		};
 	} // @formatter:on
 

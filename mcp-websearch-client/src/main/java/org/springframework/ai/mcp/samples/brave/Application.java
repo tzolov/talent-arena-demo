@@ -22,16 +22,16 @@ public class Application {
 
 		return args -> {
 			
-			System.out.println("Provided Tools: \n" +  Stream.of(tools.getToolCallbacks()).map(tc -> tc.getName()).collect(Collectors.joining("\n")));
+			System.out.println("Provided Tools: \n" +  Stream.of(tools.getToolCallbacks()).map(tc -> tc.getToolDefinition().name()).collect(Collectors.joining("\n")));
 
-			String userQuestion = "Doesn Spring AI support MCP? Please provide references and write a summary as summary.md file in the provided tmp directory.";
+			String userQuestion = "Does Spring AI support MCP? Please provide references and write a summary as a summary.md file in the provided tmp directory.";
 
 			System.out.println("\n\nQuestion: \n" + userQuestion);
 			
 			var response = chatClientBuilder.build().prompt()
 					.system("You are useful assistant and can perform web searches to answer user questions.")
 					.user(userQuestion)
-					.tools(tools)		
+					.toolCallbacks(tools)		
 					.call()
 					.content();
 

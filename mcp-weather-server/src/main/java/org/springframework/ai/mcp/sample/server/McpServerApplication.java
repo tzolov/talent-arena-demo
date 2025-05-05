@@ -23,7 +23,7 @@ public class McpServerApplication {
 	@Bean
 	public ToolCallbackProvider weatherToolsProvider(WeatherTools weatherTools) {
 		var toolCallbackProvider = MethodToolCallbackProvider.builder().toolObjects(weatherTools).build();
-		logger.info("Tools: " +  Stream.of(toolCallbackProvider.getToolCallbacks()).map(tc -> tc.getName()).toList());
+		logger.info("Tools: " +  Stream.of(toolCallbackProvider.getToolCallbacks()).map(tc -> tc.getToolDefinition()).toList());
 		return toolCallbackProvider;
 	}
 }
