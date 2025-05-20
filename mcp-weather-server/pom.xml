@@ -19,7 +19,7 @@
     <description>Sample Spring Boot application demonstrating MCP server usage</description>
 
     <properties>
-        <sprign-ai.version>1.0.0-SNAPSHOT</sprign-ai.version>
+        <sprign-ai.version>1.0.0</sprign-ai.version>
     </properties>
 
     <dependencyManagement>

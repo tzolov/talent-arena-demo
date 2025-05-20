@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +23,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Value("classpath:devoxx-amsterdam-2025-schedule.md")
+	@Value("classpath:gosim-ai-schedule.md")
 	Resource conferanceAgenda;
 
 	@Bean
@@ -40,7 +40,7 @@ public class DemoApplication {
 			// 	record Talk(String time, String session, String location, String track) {};
 			// }	
 			// List<Track> talks = chatClient.prompt()
-			// 	.system("You are a useful assistant. Be polite, and always finish the sentence with 'May the Force be with you.'")
+			// 	.system("You are a useful assistant. Follow the user instructions.")
 			// 	.user(u -> u.text("Get the list of talks grouped by tracks :\n {additionalContext}")
 			// 			.param("additionalContext", asText(conferanceAgenda)))
 			// 	.call()
@@ -49,19 +49,22 @@ public class DemoApplication {
 			// System.out.println(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(talks));
 			
 			// CHAT MEMORY
-			// var chatClient2 = chatClientBuilder
-			// 	.defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory())) // Enable chat memory
-			// 	.build();			
-			// System.out.println("Introducing the name: " + chatClient2.prompt("My name is Christian Tzolov").call().content());
-			// System.out.println("Asking for the name: " + chatClient2.prompt("What is my name?").call().content());
+			var chatMemory = MessageWindowChatMemory.builder()
+    			.maxMessages(10)
+    			.build();		
+			var chatClient2 = chatClientBuilder
+				.defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build()) // Enable chat memory
+				.build();			
+			System.out.println("Introducing the name: " + chatClient2.prompt("My name is Christian Tzolov").call().content());
+			System.out.println("Asking for the name: " + chatClient2.prompt("What is my name?").call().content());
 			
 			// TOOLs
-			// var output = chatClient.prompt()
-			// 	.tools(myTools)
-			// 	.user("What to wear today in Amsterdam and in Barcelona?")
-			// 	.call()
-			// 	.content();				
-			// System.out.println("\n" + output);
+			var output = chatClient.prompt()
+				.tools(myTools)
+				.user("What should I wear today in Amsterdam and Paris?")
+				.call()
+				.content();				
+			System.out.println("\n" + output);
 		};
 	} // @formatter:on
 
