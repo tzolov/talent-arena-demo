@@ -24,8 +24,8 @@ public class Application {
 			
 			System.out.println("Provided Tools: \n" +  Stream.of(tools.getToolCallbacks()).map(tc -> tc.getToolDefinition().name()).collect(Collectors.joining("\n")));
 
-			// String userQuestion = "Does Spring AI support MCP? Please provide references and write a summary as a summary.md file in the provided tmp directory.";
-			String userQuestion = "Does the GOSIM AI conference has a session about Model Context Protocol? Please provide references and write a summary as a summary.md file in the provided tmp directory.";
+			String userQuestion = """
+				Does the Spring IO 2025 conference has a session about Model Context Protocol? """;
 
 			System.out.println("\n\nQuestion: \n" + userQuestion);
 			

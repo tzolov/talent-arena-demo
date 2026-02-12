@@ -52,7 +52,7 @@ public class WeatherTools {
 				.retrieve()
 				.body(WeatherResponse.class);
 
-		logger.info("Check temparature for {}. Lat: {}, Lon: {}. Temp: {}", city, latitude, longitude,
+		logger.debug("Check temparature for {}. Lat: {}, Lon: {}. Temp: {}", city, latitude, longitude,
 				response.current);
 
 		return response;

@@ -17,6 +17,7 @@ package org.springframework.ai.mcp.sample.client;
 
 import io.modelcontextprotocol.client.transport.ServerParameters;
 import io.modelcontextprotocol.client.transport.StdioClientTransport;
+import io.modelcontextprotocol.json.McpJsonMapper;
 
 /**
  * With stdio transport, the MCP server is automatically started by the client. But you
@@ -37,7 +38,7 @@ public class ClientStdio {
 					"mcp-weather-server/target/mcp-ta-weather-server-0.0.1-SNAPSHOT.jar")
 			.build();
 
-		new SampleClient(new StdioClientTransport(stdioParams)).run();
+		new SampleClient(new StdioClientTransport(stdioParams, McpJsonMapper.getDefault())).run();
 	}
 
 }

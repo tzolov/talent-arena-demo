@@ -35,26 +35,26 @@ public class WeatherTools {
 		this.restClient = RestClient.create();
 	}
 
-public record WeatherResponse(Current current) {
-	public record Current(LocalDateTime time, int interval, double temperature_2m) {
+	public record WeatherResponse(Current current) {
+		public record Current(LocalDateTime time, int interval, double temperature_2m) {
+		}
 	}
-}
 
-@Tool(description = "Get the temperature (in celsius) for a specific location")
-public WeatherResponse getTemperature(@ToolParam(description = "The location latitude") double latitude,
-		@ToolParam(description = "The location longitude") double longitude,
-		@ToolParam(description = "The city name") String city) {
+	@Tool(description = "Get the temperature (in celsius) for a specific location")
+	public WeatherResponse getTemperature(@ToolParam(description = "The location latitude") double latitude,
+			@ToolParam(description = "The location longitude") double longitude,
+			@ToolParam(description = "The city name") String city) {
 
-	WeatherResponse response = restClient
-			.get()
-			.uri("https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m",
-					latitude, longitude)
-			.retrieve()
-			.body(WeatherResponse.class);
+		WeatherResponse response = restClient
+				.get()
+				.uri("https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m",
+						latitude, longitude)
+				.retrieve()
+				.body(WeatherResponse.class);
 
-	logger.info("Check temparature for {}. Lat: {}, Lon: {}. Temp: {}", city, latitude, longitude,
-			response.current);
+		logger.info("Check temparature for {}. Lat: {}, Lon: {}. Temp: {}", city, latitude, longitude,
+				response.current);
 
-	return response;
-}
+		return response;
+	}
 }
